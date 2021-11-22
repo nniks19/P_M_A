@@ -1,4 +1,4 @@
-package com.example.lv1;
+package com.example.lv1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.lv1.Adapters.MyRecyclerAdapter;
+import com.example.lv1.R;
+import com.example.lv1.Models.Student;
+import com.example.lv1.Models.StudentList;
 
 import java.io.Serializable;
 import java.util.ArrayList;

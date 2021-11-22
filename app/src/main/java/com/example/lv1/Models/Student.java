@@ -1,4 +1,4 @@
-package com.example.lv1;
+package com.example.lv1.Models;
 
 import java.io.Serializable;
 

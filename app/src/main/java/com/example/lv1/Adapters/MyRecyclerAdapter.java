@@ -1,4 +1,4 @@
-package com.example.lv1;
+package com.example.lv1.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.lv1.Models.Student;
+import com.example.lv1.R;
 
 import java.util.List;
 

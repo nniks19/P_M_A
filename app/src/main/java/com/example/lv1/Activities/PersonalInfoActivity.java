@@ -1,4 +1,4 @@
-package com.example.lv1;
+package com.example.lv1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.lv1.R;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 public class PersonalInfoActivity extends AppCompatActivity {
 

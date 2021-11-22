@@ -1,4 +1,4 @@
-package com.example.lv1;
+package com.example.lv1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.lv1.R;
+import com.example.lv1.Models.Student;
+import com.example.lv1.Models.StudentList;
 
 public class SummaryActivity extends AppCompatActivity {
 
@@ -45,7 +49,7 @@ public class SummaryActivity extends AppCompatActivity {
                         extras.getString("ime"),
                         extras.getString("prezime"),
                         extras.getString("predmet"));
-                StudentList studentList = com.example.lv1.StudentList.getInstance();
+                StudentList studentList = StudentList.getInstance();
                 studentList.AddStudent(newStudent);
                 i.putExtra("student", newStudent);
                 startActivity(i);

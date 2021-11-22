@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LV1">
         <activity
-            android:name=".PersonalInfoActivity"
+            android:name=".Activities.PersonalInfoActivity"
             android:exported="true"/>
         <activity
-            android:name=".SummaryActivity"
+            android:name=".Activities.SummaryActivity"
             android:exported="true" />
         <activity
-            android:name=".StudentInfoActivity"
+            android:name=".Activities.StudentInfoActivity"
             android:exported="true" />
         <activity
-            android:name=".StartActivity"
+            android:name=".Activities.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
