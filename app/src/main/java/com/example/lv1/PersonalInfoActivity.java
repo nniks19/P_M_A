@@ -22,8 +22,14 @@ public class PersonalInfoActivity extends AppCompatActivity {
            public void onClick(View v){
                Intent activity2Intent = new Intent(getApplicationContext(), StudentInfoActivity.class);
                TextInputEditText textInputIme = findViewById(R.id.textInputIme);
+               TextInputEditText textInputPrezime = findViewById(R.id.textInputPrezime);
+               TextInputEditText textInputGodRod = findViewById(R.id.textInputGodRod);
                String ime= textInputIme.getText().toString().trim();
+               String prezime= textInputPrezime.getText().toString().trim();
+               String datum_rodenja = textInputGodRod.getText().toString().trim();
                activity2Intent.putExtra("ime", ime);
+               activity2Intent.putExtra("prezime", prezime);
+               activity2Intent.putExtra("datum_rodenja", datum_rodenja);
                startActivity(activity2Intent);
            }
         });

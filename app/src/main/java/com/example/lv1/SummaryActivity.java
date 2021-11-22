@@ -19,11 +19,27 @@ public class SummaryActivity extends AppCompatActivity {
 
         Intent myIntent = getIntent();
         String ime = myIntent.getStringExtra("ime");
+        String prezime = myIntent.getStringExtra("prezime");
+        String datum_rodenja = myIntent.getStringExtra("datum_rodenja");
         String predmet = myIntent.getStringExtra("predmet");
-        TextView textViewIme = (TextView)findViewById(R.id.textViewIme);
-        textViewIme.setText(ime);
+        String profesor = myIntent.getStringExtra("profesor");
+        String akad_god = myIntent.getStringExtra("akad_god");
+        String br_sat_pred = myIntent.getStringExtra("br_sat_pred");
+        String br_sat_lv = myIntent.getStringExtra("br_sat_lv");
         TextView textViewPredmet = (TextView)findViewById(R.id.textViewPredmet);
         textViewPredmet.setText(predmet);
+        TextView textViewIme = (TextView)findViewById(R.id.textViewStudent);
+        textViewIme.setText(ime + " " + prezime);
+        TextView textViewDatumRodenja = (TextView)findViewById(R.id.textViewDatumRodenja);
+        textViewDatumRodenja.setText(datum_rodenja);
+        TextView textViewProfesor = (TextView)findViewById(R.id.textViewProfesor);
+        textViewProfesor.setText(profesor);
+        TextView textViewAkadGod = (TextView)findViewById(R.id.textViewAkadGod);
+        textViewAkadGod.setText(akad_god);
+        TextView textViewBrSatPred = (TextView)findViewById(R.id.textViewBrSatPred);
+        textViewBrSatPred.setText(br_sat_pred);
+        TextView textViewBrSatLv = (TextView)findViewById(R.id.textViewBrSatLv);
+        textViewBrSatLv.setText(br_sat_lv);
 
         Button buttonPocetna = findViewById(R.id.buttonPocetna);
         buttonPocetna.setOnClickListener(new View.OnClickListener(){
