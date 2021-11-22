@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputEditText;
-
 public class SummaryActivity extends AppCompatActivity {
 
     @Override
@@ -17,35 +15,39 @@ public class SummaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-        Intent myIntent = getIntent();
-        String ime = myIntent.getStringExtra("ime");
-        String prezime = myIntent.getStringExtra("prezime");
-        String datum_rodenja = myIntent.getStringExtra("datum_rodenja");
-        String predmet = myIntent.getStringExtra("predmet");
-        String profesor = myIntent.getStringExtra("profesor");
-        String akad_god = myIntent.getStringExtra("akad_god");
-        String br_sat_pred = myIntent.getStringExtra("br_sat_pred");
-        String br_sat_lv = myIntent.getStringExtra("br_sat_lv");
-        TextView textViewPredmet = (TextView)findViewById(R.id.textViewPredmet);
-        textViewPredmet.setText(predmet);
-        TextView textViewIme = (TextView)findViewById(R.id.textViewStudent);
-        textViewIme.setText(ime + " " + prezime);
-        TextView textViewDatumRodenja = (TextView)findViewById(R.id.textViewDatumRodenja);
-        textViewDatumRodenja.setText(datum_rodenja);
-        TextView textViewProfesor = (TextView)findViewById(R.id.textViewProfesor);
-        textViewProfesor.setText(profesor);
-        TextView textViewAkadGod = (TextView)findViewById(R.id.textViewAkadGod);
-        textViewAkadGod.setText(akad_god);
-        TextView textViewBrSatPred = (TextView)findViewById(R.id.textViewBrSatPred);
-        textViewBrSatPred.setText(br_sat_pred);
-        TextView textViewBrSatLv = (TextView)findViewById(R.id.textViewBrSatLv);
-        textViewBrSatLv.setText(br_sat_lv);
+        TextView txt_predmet = (TextView)findViewById(R.id.textViewPredmet);
+        TextView txt_student = (TextView)findViewById(R.id.textViewStudent);
+        TextView txt_datum = (TextView)findViewById(R.id.textViewDatumRodenja);
+        TextView txt_godina = (TextView)findViewById(R.id.textViewAkadGod);
+        TextView txt_satiPredavanja = (TextView)findViewById(R.id.textViewBrSatPred);
+        TextView txt_satiLV = (TextView)findViewById(R.id.textViewBrSatPred);
+        TextView txt_profesor = (TextView)findViewById(R.id.textViewProfesor);
+        Button btn_exit = (Button)findViewById(R.id.buttonPocetna);
 
-        Button buttonPocetna = findViewById(R.id.buttonPocetna);
-        buttonPocetna.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent i =new Intent(SummaryActivity.this, PersonalInfoActivity.class);
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            txt_predmet.setText(extras.getString("predmet"));
+            txt_student.setText(extras.getString("ime") + extras.getString("prezime"));
+            txt_datum.setText(extras.getString("datum"));
+            txt_godina.setText(extras.getString("godina"));
+            txt_satiPredavanja.setText(extras.getString("satiPredavanja"));
+            txt_satiLV.setText(extras.getString("satiLV"));
+            txt_profesor.setText(extras.getString("profesor"));
+        }
+
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SummaryActivity.this, StartActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Student newStudent = new Student(
+                        extras.getString("ime"),
+                        extras.getString("prezime"),
+                        extras.getString("predmet"));
+                StudentList studentList = com.example.lv1.StudentList.getInstance();
+                studentList.AddStudent(newStudent);
+                i.putExtra("student", newStudent);
                 startActivity(i);
             }
         });

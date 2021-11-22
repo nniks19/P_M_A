@@ -7,6 +7,7 @@
     tools:context=".StudentInfoActivity">
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayout2"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
@@ -20,7 +21,8 @@
             android:id="@+id/textInputPredmet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Naziv predmeta" />
+            android:hint="Naziv predmeta"
+            android:textColorHighlight="#0000FF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -35,6 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayout5"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
@@ -48,10 +51,12 @@
             android:id="@+id/textInputProfesor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ime profesora" />
+            android:hint="Ime profesora"
+            android:textColorHighlight="#0000FF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayout6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -66,10 +71,12 @@
             android:id="@+id/textInputAkadGod"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Trenutna akademska godina" />
+            android:hint="Trenutna akademska godina"
+            android:textColorHighlight="#0000FF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayout8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -84,10 +91,12 @@
             android:id="@+id/txtInputBrSatPred"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Br. sati predavanja" />
+            android:hint="Br. sati predavanja"
+            android:textColorHighlight="#0000FF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/textInputLayout7"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
