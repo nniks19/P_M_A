@@ -1,4 +1,4 @@
-package com.example.lv1.Adapters;
+package com.example.lv1;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,9 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.lv1.Models.Student;
-import com.example.lv1.R;
 
 import java.util.List;
 
@@ -22,18 +19,19 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup
                                                               viewGroup, int viewType) {
-        if(viewType == 0)
+        if(dataList.get(viewType) instanceof String)
         {
             View view = (View) LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.my_header, viewGroup, false);
+                    .inflate(R.layout.header_view, viewGroup, false);
             return new HeaderViewHolder(view);
         }
-        else
+        else if(dataList.get(viewType) instanceof Student)
         {
             View view = (View) LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.my_row, viewGroup, false);
+                    .inflate(R.layout.student_view, viewGroup, false);
             return new StudentViewHolder(view);
         }
+        return null;
     }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {

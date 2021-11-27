@@ -1,4 +1,4 @@
-package com.example.lv1.Models;
+package com.example.lv1;
 
 import java.util.ArrayList;
 import java.util.List;
