@@ -17,7 +17,7 @@ import android.widget.TextView;
  * Use the {@link SummaryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SummaryFragment extends Fragment {
+public class SummaryFragment extends Fragment implements FragmentObserver{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,6 +81,7 @@ public class SummaryFragment extends Fragment {
         txt_profesor = view.findViewById(R.id.txt_profesor);
         imageViewProfilna = view.findViewById(R.id.imageViewSummary);
         btn_spremi = view.findViewById(R.id.btn_exit);
+        updateValues();
 
         btn_spremi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,11 +101,7 @@ public class SummaryFragment extends Fragment {
 
         return view;
     }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-
+    public void updateValues() {
         if(fragmentListener != null) {
             txt_ime.setText(fragmentListener.getIme());
             txt_prezime.setText(fragmentListener.getPrezime());
@@ -117,4 +114,5 @@ public class SummaryFragment extends Fragment {
             imageViewProfilna.setImageBitmap(fragmentListener.getProfilna());
         }
     }
+
 }
