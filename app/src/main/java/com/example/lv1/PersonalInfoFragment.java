@@ -153,7 +153,6 @@ public class PersonalInfoFragment extends Fragment {
 
         return view;
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {

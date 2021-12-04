@@ -67,7 +67,7 @@ public class FragmentAdapter extends FragmentStateAdapter implements FragmentLis
     }
 
     @Override
-    public void setPredmet(String predmet) {
+    public void setPredmet(CourseModel predmet) {
         student.Predmet = predmet;
         notifyAllObservers();
     }
@@ -97,7 +97,7 @@ public class FragmentAdapter extends FragmentStateAdapter implements FragmentLis
     }
 
     @Override
-    public void setProfesor(String profesor) {
+    public void setProfesor(Instructor profesor) {
         student.Profesor = profesor;
         notifyAllObservers();
     }
@@ -119,7 +119,7 @@ public class FragmentAdapter extends FragmentStateAdapter implements FragmentLis
     }
 
     @Override
-    public String getPredmet() {
+    public CourseModel getPredmet() {
         return student.Predmet;
     }
 
@@ -144,7 +144,7 @@ public class FragmentAdapter extends FragmentStateAdapter implements FragmentLis
     }
 
     @Override
-    public String getProfesor() {
+    public Instructor getProfesor() {
         return student.Profesor;
     }
 

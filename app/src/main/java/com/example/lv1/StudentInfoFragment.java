@@ -9,105 +9,42 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StudentInfoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class StudentInfoFragment extends Fragment {
+import java.util.ArrayList;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+public class StudentInfoFragment extends Fragment implements Callback<CourseResponse>
+{
     public FragmentListener fragmentListener;
-
-    EditText input_predmet, input_profesor, input_godina, input_sati_predavanja, input_sati_lv;
+    private View view;
+    private EditText input_godina, input_sati_predavanja, input_sati_lv;
+    private ArrayList<CourseModel> courses = new ArrayList<>();
 
     public StudentInfoFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StudentInfoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StudentInfoFragment newInstance(String param1, String param2) {
-        StudentInfoFragment fragment = new StudentInfoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        ApiManager.getInstance().service().getCourses().enqueue(this); //asinkroni poziv
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_student_info, container, false);
 
-        input_predmet = view.findViewById(R.id.input_predmet);
-        input_profesor = view.findViewById(R.id.input_profesor);
+        view = inflater.inflate(R.layout.fragment_student_info, container, false);
+
         input_godina = view.findViewById(R.id.input_godina);
         input_sati_predavanja = view.findViewById(R.id.input_sati_predavanja);
         input_sati_lv = view.findViewById(R.id.input_sati_lv);
-
-        input_predmet.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                fragmentListener.setPredmet(input_predmet.getText().toString());
-            }
-        });
-
-        input_profesor.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                fragmentListener.setProfesor(input_profesor.getText().toString());
-            }
-        });
 
         input_godina.addTextChangedListener(new TextWatcher() {
             @Override
@@ -162,4 +99,58 @@ public class StudentInfoFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onResponse(Call<CourseResponse> call, Response<CourseResponse> response) {
+        if (response.isSuccessful() && response.body() != null){
+            for(CourseModel course : response.body().courses)
+            {
+                if(course.instructors != null)
+                {
+                    courses.add(course);
+                }
+            }
+        }
+
+        PredmetSpinnerAdapter predmetSpinnerAdapter = new PredmetSpinnerAdapter(getActivity(),
+                android.R.layout.simple_spinner_item,
+                courses);
+        Spinner predmetSpinner = (Spinner) view.findViewById(R.id.spinner_predmet);
+        predmetSpinner.setAdapter(predmetSpinnerAdapter);
+        predmetSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+                fragmentListener.setPredmet(courses.get(position));
+
+                ProfesorSpinnerAdapter profesorSpinnerAdapter = new ProfesorSpinnerAdapter(getActivity(),
+                        android.R.layout.simple_spinner_item,
+                        fragmentListener.getPredmet().instructors);
+                Spinner profesorSpinner = (Spinner) view.findViewById(R.id.spinner_profesor);
+                profesorSpinner.setAdapter(profesorSpinnerAdapter);
+
+                profesorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+                        fragmentListener.setProfesor(fragmentListener.getPredmet().instructors.get(position));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onFailure(Call<CourseResponse> call, Throwable throwable) {
+        throwable.printStackTrace();
+    }
+
 }
